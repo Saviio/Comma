@@ -1,0 +1,17 @@
+{
+  "name": "JDBookRating",
+  "manifest_version": 2,
+  "version":"0.0.1",
+  "description": "Display the rate of book when we seek book on JD.com.",
+  "background" : {
+        "persistent": false,
+        "scripts": ["vue.min.js", "rate.js"],
+        "tabs"
+  },
+  "permissions": ["http://*.jd.com/", "https://*.jd.com/","http://*.douban.com/","https://*.douban.com/"],
+  "browser_action": {
+    "default_icon": "ExIcon.png" ,
+    "default_title": "JD Book Rating",
+    "default_popup": "popup.html"
+  }
+}
