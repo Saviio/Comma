@@ -1,0 +1,16 @@
+#summary-douban{
+    display:block;
+    padding-top:6px;
+    padding-bottom:6px;
+    padding-left:72px;
+    padding-right:20px;
+}
+
+#summary-douban .dt{
+    float:left;
+    width:72px;
+    margin-left:-72px;
+    display:inline;
+    text-align:right;
+    font-family:simsun
+}

@@ -1,17 +1,22 @@
 {
-  "name": "JDBookRating",
   "manifest_version": 2,
-  "version":"0.0.1",
+  "name": "JD Book Plugin",
+  "version": "0.0",
   "description": "Display the rate of book when we seek book on JD.com.",
-  "background" : {
-        "persistent": false,
-        "scripts": ["vue.min.js", "rate.js"],
-        "tabs"
+  "background": {
+    "persistent": false,
+    "scripts": ["rating.js","vue.min.js"]
   },
-  "permissions": ["http://*.jd.com/", "https://*.jd.com/","http://*.douban.com/","https://*.douban.com/"],
+  "content_scripts": [{
+    "matches": ["*://*.jd.com/*"],
+    "js": ["content.js"],
+    "run_at":"document_end",
+    "css":["content.css"]
+  }],
   "browser_action": {
-    "default_icon": "ExIcon.png" ,
-    "default_title": "JD Book Rating",
-    "default_popup": "popup.html"
-  }
+    "default_icon": "icon.png",
+    "default_title": "JD Book Plugin"
+  },
+
+  "permissions": ["activeTab","http://*.douban.com/","https://*.douban.com/"]
 }
