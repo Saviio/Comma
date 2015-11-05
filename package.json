@@ -1,0 +1,26 @@
+{
+  "name": "jd-book-plugin",
+  "version": "0.0.1",
+  "description": "",
+  "main": "content.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Saviio/JD-Book-Plugin.git"
+  },
+  "author": "Saviio",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Saviio/JD-Book-Plugin/issues"
+  },
+  "homepage": "https://github.com/Saviio/JD-Book-Plugin#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-browserify": "^0.5.1"
+  },
+  "dependencies": {
+    "promise": "^7.0.4"
+  }
+}
