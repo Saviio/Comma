@@ -2,6 +2,11 @@
 
 var connect = require('./connect')
 var appendToDOM = require('./appendToDOM')
+var helper=require('./helper')
+
+var DOM=document
+var WIN=window
+var BODY=DOM.body
 
 function init(ref){
     var info = document.querySelectorAll('#parameter2 > li')
@@ -18,8 +23,17 @@ function init(ref){
     }
 }
 
+function showDetail(ref){
+    if(ref.data===null || ref.data===undefined)
+        return
+
+    var iframe='<iframe src="{{0}} style="{{1}}"></iframe>"'
+
+}
+
 
 
 
 
 exports.init=init
+exports.showDetail=showDetail

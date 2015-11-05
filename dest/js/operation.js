@@ -1248,23 +1248,7 @@ function requestFlush() {
 }).call(this,require("1YiZ5S"))
 },{"1YiZ5S":3,"domain":1}],14:[function(require,module,exports){
 
-function transform(template){
-
-    var dom = document.createElement('div')
-
-    var args = [].slice.call(arguments,1)
-    args.forEach(function(e,i){
-        var re = new RegExp("\\{\\{"+i+"\\}\\}",'g')
-        template = template.replace(re ,function(){
-            var t = document.createElement('div')
-            t.innerText = e
-            return t.innerHTML
-        })
-    })
-
-    dom.innerHTML = template
-    return dom.children.length == 1 ? dom.children[0] : dom.children
-}
+var helper=require('./helper')
 
 function appendDoubanLabel(data){
 
@@ -1278,9 +1262,9 @@ function appendDoubanLabel(data){
 
     var dom = undefined
     if(data !== null)
-        dom = transform(template,data.rating.average,data.rating.numRaters)
+        dom = helper.transform(template,data.rating.average,data.rating.numRaters)
     else
-        dom = transform(template)
+        dom = helper.transform(template)
 
     var summary = document.getElementById('summary')
     summary.appendChild(dom)
@@ -1289,7 +1273,7 @@ function appendDoubanLabel(data){
 
 module.exports = appendDoubanLabel
 
-},{}],15:[function(require,module,exports){
+},{"./helper":17}],15:[function(require,module,exports){
 var Promise = require('promise')
 
 function connect(verb,url,data,type){
@@ -1329,6 +1313,11 @@ module.exports=connect
 
 var connect = require('./connect')
 var appendToDOM = require('./appendToDOM')
+var helper=require('./helper')
+
+var DOM=document
+var WIN=window
+var BODY=DOM.body
 
 function init(ref){
     var info = document.querySelectorAll('#parameter2 > li')
@@ -1345,10 +1334,43 @@ function init(ref){
     }
 }
 
+function showDetail(ref){
+    if(ref.data===null || ref.data===undefined)
+        return
+
+    var iframe='<iframe src="{{0}} style="{{1}}"></iframe>"'
+
+}
+
 
 
 
 
 exports.init=init
+exports.showDetail=showDetail
 
-},{"./appendToDOM":14,"./connect":15}]},{},[16])
+},{"./appendToDOM":14,"./connect":15,"./helper":17}],17:[function(require,module,exports){
+
+
+function transform(template){
+
+    var dom = document.createElement('div')
+
+    var args = [].slice.call(arguments,1)
+    args.forEach(function(e,i){
+        var re = new RegExp("\\{\\{"+i+"\\}\\}",'g')
+        template = template.replace(re ,function(){
+            var t = document.createElement('div')
+            t.innerText = e
+            return t.innerHTML
+        })
+    })
+
+    dom.innerHTML = template
+    return dom.children.length == 1 ? dom.children[0] : dom.children
+}
+
+
+exports.transform=transform
+
+},{}]},{},[16])

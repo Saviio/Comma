@@ -1,21 +1,5 @@
 
-function transform(template){
-
-    var dom = document.createElement('div')
-
-    var args = [].slice.call(arguments,1)
-    args.forEach(function(e,i){
-        var re = new RegExp("\\{\\{"+i+"\\}\\}",'g')
-        template = template.replace(re ,function(){
-            var t = document.createElement('div')
-            t.innerText = e
-            return t.innerHTML
-        })
-    })
-
-    dom.innerHTML = template
-    return dom.children.length == 1 ? dom.children[0] : dom.children
-}
+var helper=require('./helper')
 
 function appendDoubanLabel(data){
 
@@ -29,9 +13,9 @@ function appendDoubanLabel(data){
 
     var dom = undefined
     if(data !== null)
-        dom = transform(template,data.rating.average,data.rating.numRaters)
+        dom = helper.transform(template,data.rating.average,data.rating.numRaters)
     else
-        dom = transform(template)
+        dom = helper.transform(template)
 
     var summary = document.getElementById('summary')
     summary.appendChild(dom)
