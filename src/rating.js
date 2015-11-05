@@ -11,5 +11,5 @@ chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
 
 
 chrome.browserAction.onClicked.addListener(function(tabId, changeInfo, tab){
-    chrome.tabs.sendMessage(tab.id,{type:'SHOW_DETAIL', EMPTY})
+    chrome.tabs.sendMessage(tab.id, {type:'SHOW_DETAIL', EMPTY})
 })

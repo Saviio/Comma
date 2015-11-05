@@ -1,8 +1,7 @@
 
 var
-     BOOK_ENTITY = null
-    ,connect = require('./connect')
-    ,appendToDOM = require('./appendToDOM')
+     ITEM = {}
+    ,operation = require('./operation')
 
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
     if (msg.text === 'PAGE_INIT') {
@@ -22,19 +21,4 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
 })
 
 
-function init(){
-    var info = document.querySelectorAll('#parameter2 > li')
-    if(info != null && info.length > 2){
-        var ISBN = info[1].innerText.split('：').pop()
-        connect('GET','https://api.douban.com/v2/book/isbn/'+ISBN)
-        .then(function(data){
-            BOOK_ENTITY = data
-            appendToDOM(data)
-        },function(e){
-            appendToDOM(null)
-        })
-    }
-}
-
-
-init()
+operation.init(ITEM)
