@@ -3,7 +3,7 @@ var browserify = require('gulp-browserify');
 
 gulp.task('scripts', function() {
 
-    gulp.src('src/content.js')
+    gulp.src('src/*.js')
         .pipe(browserify())
         .pipe(gulp.dest('./dest/js'))
 

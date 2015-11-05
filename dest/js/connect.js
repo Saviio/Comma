@@ -1247,49 +1247,6 @@ function requestFlush() {
 
 }).call(this,require("1YiZ5S"))
 },{"1YiZ5S":3,"domain":1}],14:[function(require,module,exports){
-
-function transform(template){
-
-    var dom=document.createElement('div')
-
-    var args=[].slice.call(arguments,1)
-    args.forEach(function(e,i){
-        var re=new RegExp("\\{\\{"+i+"\\}\\}",'g')
-        template=template.replace(re ,function(){
-            var t=document.createElement('div')
-            t.innerText=e
-            return t.innerHTML
-        })
-    })
-
-    dom.innerHTML=template
-    return dom.children.length == 1 ? dom.children[0] : dom.children
-}
-
-function appendDoubanLabel(data){
-
-    var ct= data!==null ? "{{0}} 分 (" + (data.rating.numRaters >= 10 ? "{{1}}" : "少于10") + "人评价)" : "抱歉，无法在豆瓣发现对应的书籍资料"
-
-    var template=''
-        +'<div id="summary-douban">'
-        +'<div class="dt">豆瓣评分：</div>'
-        +'<div class="dd">'+ct+'</div>'
-        +'</div>'
-
-    var dom=undefined
-    if(data!==null)
-        dom=transform(template,data.rating.average,data.rating.numRaters)
-    else
-        dom=transform(template)
-
-    var summary=document.getElementById('summary')
-    summary.appendChild(dom)
-}
-
-
-module.exports=appendDoubanLabel
-
-},{}],15:[function(require,module,exports){
 var Promise = require('promise')
 
 function connect(verb,url,data,type){
@@ -1324,46 +1281,4 @@ function connect(verb,url,data,type){
 
 module.exports=connect
 
-},{"promise":4}],16:[function(require,module,exports){
-
-var
-     BOOK_ENTITY=null
-    ,connect=require('./connect')
-    ,appendToDOM=require('./appendToDOM')
-
-chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
-    if (msg.text === 'PAGE_INIT') {
-        sendResponse(true)
-    }
-
-    switch(msg.type){
-        case "SHOW_DETAIL":
-            console.log('SHOW_DETAIL')
-            break;
-        case "PAGE_INIT":
-            console.log('PAGE_INIT')
-            break;
-        default:
-            break;
-    }
-})
-
-
-function init(){
-    var info=document.querySelectorAll('#parameter2 > li')
-    if(info!=null && info.length>2){
-        var ISBN=info[1].innerText.split('：').pop()
-        connect('GET','https://api.douban.com/v2/book/isbn/'+ISBN)
-        .then(function(data){
-            BOOK_ENTITY=data
-            appendToDOM(data)
-        },function(e){
-            appendToDOM(null)
-        })
-    }
-}
-
-
-init()
-
-},{"./appendToDOM":14,"./connect":15}]},{},[16])
+},{"promise":4}]},{},[14])

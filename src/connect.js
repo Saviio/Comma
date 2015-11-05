@@ -5,21 +5,23 @@ function connect(verb,url,data,type){
         var xhr = new XMLHttpRequest()
         xhr.open(verb, url)
         xhr.onload = function() {
-            if (this.status >= 200 && this.status < 300) {
-                if(type==undefined)
-                    resolve(JSON.parse(xhr.response))
-                else
-                    resolve(xhr.response)
-            } else {
-                reject({
-                    status: this.status,
-                    statusText: xhr.statusText
-                })
+            if(xhr.readyState == 4){
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    if(type==undefined)
+                        resolve(JSON.parse(xhr.response))
+                    else
+                        resolve(xhr.response)
+                } else {
+                    reject({
+                        status: xhr.status,
+                        statusText: xhr.statusText
+                    })
+                }
             }
         }
         xhr.onerror = function() {
             reject({
-                status: this.status,
+                status: xhr.status,
                 statusText: xhr.statusText
             })
         }
