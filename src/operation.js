@@ -9,9 +9,17 @@ var WIN=window
 var BODY=DOM.body
 
 function init(ref){
-    var info = document.querySelectorAll('#parameter2 > li')
-    if(info != null && info.length > 2){
-        var ISBN = info[1].innerText.split('：').pop()
+    var info = document.querySelectorAll('#parameter2 li')
+    if(info != null && info.length >= 1){
+
+        var param=[].filter.call(info,function(evt){
+            return evt.innerText.indeOf('ISBN')>-1
+        })[0]
+
+        if(param==undefined)
+            return
+
+        var ISBN=param.innerText.split('：').pop()
 
         connect('GET','https://api.douban.com/v2/book/isbn/'+ISBN)
         .then(function(data){
