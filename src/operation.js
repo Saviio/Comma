@@ -1,4 +1,4 @@
-
+﻿
 
 var connect = require('./connect')
 var appendToDOM = require('./appendToDOM')
@@ -13,7 +13,7 @@ function init(ref){
     if(info != null && info.length >= 1){
 
         var param=[].filter.call(info,function(evt){
-            return evt.innerText.indeOf('ISBN')>-1
+            return evt.innerText.indexOf('ISBN')>-1
         })[0]
 
         if(param==undefined)
