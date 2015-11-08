@@ -8,6 +8,8 @@
 ![image](https://raw.githubusercontent.com/Saviio/Saviio.github.io/master/images/jd.jpg)
 ####亚马逊
 ![image](https://raw.githubusercontent.com/Saviio/Saviio.github.io/master/images/amazon.jpg)
+####当当
+![image](https://raw.githubusercontent.com/Saviio/Saviio.github.io/master/images/dangdang.jpg)
 
 ###原理
 很简单，任何一本出版物都有全球唯一的编号，称为国际标准书号(ISBN)，而豆瓣也提供了基于ISBN查询书籍的API，所以每当浏览图书页面时，用页面上的ISBN编码就可以通过API去查询该书的一干资料了。
@@ -19,13 +21,13 @@
 4. 将后缀为.crx的文件拖入浏览器
 5. 安装完成
 
+权限请求：
 ![image](https://raw.githubusercontent.com/Saviio/Saviio.github.io/master/images/bs.auth.jpg)
 
 ###Todo
-1. 支持当当
-2. 支持天猫书城?
-3. 优化插件响应逻辑
-4. 新增书籍详情功能
+1. 支持天猫书城?
+2. 优化插件响应逻辑
+3. 新增书籍详情功能
 
 
 ###License
