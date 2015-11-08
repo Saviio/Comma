@@ -32,4 +32,4 @@
 Copyright (c) 2015 Saviio
 
 ---------
-Thank you for your watching and using, Enjoy.
+Thanks for your watching and using, Enjoy.
