@@ -1325,7 +1325,7 @@ var DOM=document
 var WIN=window
 var BODY=DOM.body
 
-var site={
+var bookstore={
     amazon:{
         name:'amazon',
         re:/https?:\/\/.*\.amazon\.c[om|n]/,
@@ -1344,9 +1344,9 @@ function init(ref, acc){
 
     acc=acc || 0
     var type=null
-    for(var i in site){
-        if(site[i].re.test(window.location.href)){
-            type=site[i]
+    for(var i in bookstore){
+        if(bookstore[i].re.test(window.location.href)){
+            type=bookstore[i]
             break
         }
     }

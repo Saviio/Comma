@@ -1,9 +1,9 @@
 {
     "author":"Saviio",
     "manifest_version": 2,
-    "name": "JD Book Plugin",
+    "name": "Bookstore.Extension",
     "version": "0.0",
-    "description": "Display the rate of book when we seek book on JD.com.",
+    "description": "Fetch the rate of book from douban and display it in the website.",
     "background": {
         "persistent": false,
         "scripts": ["js/rating.js","js/vue.min.js"]
@@ -23,7 +23,7 @@
     ],
     "browser_action": {
         "default_icon": "icon.png",
-        "default_title": "JD Book Plugin"
+        "default_title": "Bookstore.Extension"
     },
 
     "permissions": ["activeTab","http://*.douban.com/","https://*.douban.com/"]
