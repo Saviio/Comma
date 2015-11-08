@@ -19,6 +19,11 @@
             "matches": ["*://*.amazon.cn/*"],
             "js": ["js/content.js"],
             "run_at":"document_end"
+        },
+        {
+            "matches": ["*://*.dangdang.com/*"],
+            "js": ["js/content.js"],
+            "run_at":"document_end"
         }
     ],
     "browser_action": {
