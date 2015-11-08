@@ -1250,24 +1250,30 @@ function requestFlush() {
 
 var helper=require('./helper')
 
-function appendDoubanLabel(data){
+
+function appendDoubanLabel(data, type){
 
     var ct = data !== null ? "{{0}} 分 (" + (data.rating.numRaters >= 10 ? "{{1}}" : "少于10") + "人评价)" : "抱歉，无法在豆瓣发现对应的书籍资料"
 
-    var template = ''
-        +'<div id="summary-douban">'
-        +'<div class="dt">豆瓣评分：</div>'
-        +'<div class="dd">'+ct+'</div>'
-        +'</div>'
+
+    var template={
+        jd:''
+            +'<div id="summary-douban">'
+            +'<div class="dt">豆瓣评分：</div>'
+            +'<div class="dd">'+ct+'</div>'
+            +'</div>',
+        amazon:'<div>豆瓣评分:'+ct+'</div>'
+    }
+
 
     var dom = undefined
     if(data !== null)
-        dom = helper.transform(template,data.rating.average,data.rating.numRaters)
+        dom = helper.transform(template[type.name],data.rating.average,data.rating.numRaters)
     else
-        dom = helper.transform(template)
+        dom = helper.transform(template[type.name])
 
-    var summary = document.getElementById('summary')
-    summary.appendChild(dom)
+    var container = document.querySelector(type.container)
+    container.appendChild(dom)
 }
 
 
@@ -1369,36 +1375,65 @@ var DOM=document
 var WIN=window
 var BODY=DOM.body
 
-function init(ref, delay){
-    var info = document.querySelectorAll('#parameter2 li')
-    if(info == null && !delay)
-        setTimeout(init(ref,true),1000)
-    else if(info.length>=1) {
-        var param=[].filter.call(info,function(evt){
-            return evt.innerText.indexOf('ISBN')>-1
-        })[0]
-
-        if(param==undefined)
-            return
-
-        var ISBN=param.innerText.split('：').pop()
-
-        connect('GET','https://api.douban.com/v2/book/isbn/'+ISBN)
-        .then(function(data){
-            ref['data'] = data
-            appendToDOM(data)
-        },function(e){
-            appendToDOM(null)
-        })
+var site={
+    amazon:{
+        name:'amazon',
+        re:/https?:\/\/.*\.amazon\.c[om|n]/,
+        selector:'.bucket > .content > ul > li',
+        container:'#dynamicDeliveryMessage_feature_div'
+    },
+    jd:{
+        name:'jd',
+        re:/https?:\/\/.*\.jd\.com/,
+        selector:'#parameter2 li',
+        container:'#summary'
     }
 }
+
+function init(ref, acc){
+
+    acc=acc || 0
+    var type=null
+    for(var i in site){
+        if(site[i].re.test(window.location.href)){
+            type=site[i]
+            break
+        }
+    }
+
+    if(type!==null){
+        var info = document.querySelectorAll(type.selector)
+        if(info == null && acc<3){
+            setTimeout(init(ref, acc++), 1000)
+        } else if(info.length >= 1) {
+
+            var ISBN = null
+            for(var i = 0;i < info.length; i++){
+                var ret=info[i].innerText.match(/ISBN[:|：]\W?(\d{10,})/)
+                if(ret && ret.length > 0)
+                    ISBN = ret[1]
+            }
+
+            if(ISBN != null){
+                connect('GET','https://api.douban.com/v2/book/isbn/'+ISBN)
+                .then(function(data){
+                    ref['data'] = data
+                    appendToDOM(data, type)
+                },function(e){
+                    appendToDOM(null, type)
+                })
+            }
+        }
+    }
+}
+
+
 
 function showDetail(ref){
     if(ref.data===null || ref.data===undefined)
         return
 
     var iframe='<iframe src="{{0}} style="{{1}}"></iframe>"'
-
 }
 
 
