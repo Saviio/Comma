@@ -22,6 +22,7 @@
 5. 安装完成
 
 权限请求：
+
 ![image](https://raw.githubusercontent.com/Saviio/Saviio.github.io/master/images/bs.auth.jpg)
 
 ###Todo
