@@ -18,6 +18,7 @@
 3. 在地址栏中输入chrome://extensions/
 4. 将后缀为.crx的文件拖入浏览器
 5. 安装完成
+![image](https://raw.githubusercontent.com/Saviio/Saviio.github.io/master/images/bs.auth.jpg)
 
 ###Todo
 1. 支持当当
