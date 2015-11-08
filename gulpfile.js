@@ -8,13 +8,13 @@ gulp.task('client', function() {
     gulp.src(['src/content.js'])
         .pipe(browserify())
         .pipe(uglify())
-        .pipe(gulp.dest('./dest/js'))
+        .pipe(gulp.dest('./dist/js'))
 });
 
 gulp.task('background',function(){
     gulp.src(['src/rating.js'])
         .pipe(browserify())
-        .pipe(gulp.dest('./dest/js'))
+        .pipe(gulp.dest('./dist/js'))
 })
 
 
