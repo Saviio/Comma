@@ -18,7 +18,7 @@
 1. 下载Bookstore.Extension.zip
 2. 打开Chrome
 3. 在地址栏中输入chrome://extensions/
-4. 将后缀为.crx的文件拖入浏览器
+4. [下载](https://github.com/Saviio/Bookstore.Extension/raw/master/Bookstore.extension.crx), 并拖动至浏览器内
 5. 安装完成
 
 权限请求：
