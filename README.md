@@ -11,8 +11,6 @@
 ####当当
 ![image](https://raw.githubusercontent.com/Saviio/Saviio.github.io/master/images/dangdang.jpg)
 
-###原理
-很简单，任何一本出版物都有全球唯一的编号，称为国际标准书号(ISBN)，而豆瓣也提供了基于ISBN查询书籍的API，所以每当浏览图书页面时，用页面上的ISBN编码就可以通过API去查询该书的一干资料了。
 
 ###使用
 1. 下载Bookstore.Extension.zip
