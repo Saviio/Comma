@@ -1,13 +1,21 @@
 var gulp = require('gulp');
 var browserify = require('gulp-browserify');
+var uglify = require('gulp-uglify');
 
-gulp.task('scripts', function() {
 
-    gulp.src('src/*.js')
+gulp.task('client', function() {
+
+    gulp.src(['src/content.js'])
         .pipe(browserify())
+        .pipe(uglify())
         .pipe(gulp.dest('./dest/js'))
-
 });
 
+gulp.task('background',function(){
+    gulp.src(['src/rating.js'])
+        .pipe(browserify())
+        .pipe(gulp.dest('./dest/js'))
+})
 
-gulp.task('default',['scripts'])
+
+gulp.task('default',['client','background'])

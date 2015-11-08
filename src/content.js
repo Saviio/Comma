@@ -13,7 +13,7 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
             operation.showDetail(ITEM)
             break;
         case "PAGE_INIT":
-            console.log('PAGE_INIT')
+            //console.log('PAGE_INIT')
             break;
         default:
             break;
