@@ -22,6 +22,8 @@
     "gulp-uglify": "^1.4.2"
   },
   "dependencies": {
-    "promise": "^7.0.4"
+    "promise": "^7.0.4",
+    "vue": "^1.0.11",
+    "vuex": "^0.2.0"
   }
 }

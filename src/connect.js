@@ -19,13 +19,14 @@ function connect(verb,url,data,type){
                 }
             }
         }
+
         xhr.onerror = function() {
             reject({
                 status: xhr.status,
                 statusText: xhr.statusText
             })
         }
-        xhr.send((data===null||data===undefined)?null:data)
+        xhr.send((data === null || data === undefined) ? null : data)
     })
 }
 
