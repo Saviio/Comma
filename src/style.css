@@ -39,7 +39,7 @@
     top: 0px;
     z-index: 10;
     width: 100%;
-    opacity: 0.4;
+    opacity: 0.35;
     background-color: black;
 }
 
@@ -79,5 +79,24 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    text-shadow: 0px 2px 2px #333333;
+    text-shadow: 0px 1px 1px #333333;
+    color:#E2E2E2;
+}
+
+#detail-comments{
+    height: 35px;
+    line-height: 35px;
+    padding-left: 20px;
+    background: #30a080;
+
+    font-size: 12px;
+    color: #E0E0E0;
+    width: 230px;
+    margin: auto;
+    border-radius:5px;
+    margin-top: 10px;
+    text-shadow: 0px 1px 1px #333333;
+
+    -webkit-user-select:none;
+    user-select:none;
 }
