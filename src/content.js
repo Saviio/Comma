@@ -1,7 +1,9 @@
 
-var
-     ITEM = {}
-    ,operation = require('./operation')
+var operation = require('./operation'),
+    ITEM = {
+        url  : null,
+        data : null
+    }
 
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
     if (msg.text === 'PAGE_INIT') {

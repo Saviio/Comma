@@ -2,8 +2,8 @@
 var helper=require('./helper')
 
 
-function appendDoubanLabel(data, type){
 
+module.exports = function(data, type){
     var ct = data !== null ? "{{0}} 分 (" + (data.rating.numRaters >= 10 ? "{{1}}" : "少于10") + "人评价)" : "抱歉，无法在豆瓣发现对应的书籍资料"
 
     var template={
@@ -25,6 +25,3 @@ function appendDoubanLabel(data, type){
     var container = document.querySelector(type.container)
     container.appendChild(dom)
 }
-
-
-module.exports = appendDoubanLabel

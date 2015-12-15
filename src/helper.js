@@ -19,4 +19,4 @@ function transform(template){
 }
 
 
-exports.transform=transform
+exports.transform = transform
