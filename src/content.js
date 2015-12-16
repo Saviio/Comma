@@ -13,12 +13,14 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
     switch(msg.type){
         case "SHOW_DETAIL":
             operation.showDetail(ITEM)
-            break;
+            break
         case "PAGE_INIT":
             //console.log('PAGE_INIT')
-            break;
+            break
+        case "DETAIL_CLOSE":
+            break
         default:
-            break;
+            break
     }
 })
 
