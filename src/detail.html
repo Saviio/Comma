@@ -7,39 +7,38 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width"/>
 <link rel="stylesheet" href="./style.css" media="screen" charset="utf-8">
+<script src="../node_modules/vue/dist/vue.min.js"></script>
 </head>
 <body>
-    <div class="wrapper">
+    <div id="app">
         <div id="detail-head">
             <div id="btn-close">
                 ×
             </div>
             <div id="detail-mask"></div>
-            <div id="detail-head-backgound" class="blur">
-
-            </div>
+            <div id="detail-head-backgound" class="blur" v-bind:style="{ backgroundImage: 'url('+image+')'}"></div>
             <div id="detail-pic">
-                <img src="../s28343125.jpg" width="110px" height="160px"/>
+                <img v-bind:src="image" width="110px" height="160px"/>
             </div>
             <div id="detail-info">
                 <ul>
                     <li>
-                        作者: [美]欧文·斯通
+                        作者: {{authors()}}
                     </li>
                     <li>
-                        出版社: 南京大学出版社
+                        出版社: {{publisher}}
                     </li>
                     <li>
-                        副标题: 米开朗基罗传①
+                        副标题: {{subtitle}}
                     </li>
                     <li>
-                        译者: 武建博 / 张晓意
+                        出版年: {{pubdate}}
                     </li>
                     <li>
-                        出版年: 2016-1
+                        页数: {{pages}}
                     </li>
                     <li>
-                        页数: 440
+                        译者: {{translators()}}
                     </li>
                 </ul>
             </div>
@@ -48,32 +47,47 @@
             <span>简介</span>
             <span>笔记</span>
         </>
-        <!--<div id="detail-tab">
-            <ul style="list-style:none;">
-                <li>
-                    简介
-                </li>
-                <li>
-                    热评
-                </li>
-                <li>
-                    信息
-                </li>
-                <li>
-                    短评
-                </li>
-            </ul></div>-->
-
-        <!--<div id="detail-comments">
-            热门评论
-        </div>-->
         <div id="topic">
-            <div id="title">痛苦与狂喜:向石而生</div>
-            <span class="rating">7.9分</span>
+            <div id="title">{{title}}</div>
+            <span class="rating">{{rating}}分</span>
         </div>
         <div id="summary"><!--临界值145个字符，每add一个p 增加22个字符-->
-             <p>《痛苦与狂喜：向石而生——米开朗基罗传1》是《痛苦与狂喜：米开朗基罗传》的上部。下部《痛苦与狂喜：众神之巅——米开朗基罗传2》也即将上市，敬请期待。<br>===============================================================<br>◆欧文•斯通作品  《渴望生活：梵高传》姊妹篇<br>◆奥斯卡金像奖电影《痛苦与狂喜》原著<br>◆附精美彩色插页，原貌呈现米开朗基罗作品</p>
+             {{{abstract()}}}
         </div>
     </div>
+    <script>
+        var card = {
+            el:'#app',
+            data: {
+                image:'https:\/\/img1.doubanio.com\/lpic\/s28342657.jpg',
+                author:["[荷] 文森特•梵高","[美]  H. 安娜•苏 \/ 编"],
+                publisher:'北京联合出版公司',
+                subtitle:'梵高书信、画作、珍贵手稿',
+                pubdate:'2016-1',
+                translator:["57°N艺术小组"],
+                pages:'416',
+                title:'梵高手稿',
+                rating:'8.0',
+                summary:"梵高一生中写过很多信，大多数都是寄给弟弟提奥的，也有不少是写给家人和其他艺术家的，如保罗•高更与埃米尔•伯纳德。梵高一生中也画了很多画，而基本上每一幅都被他在信中用如诗般优美的语言细细描述过。\n【内容简介】\n自学画画的梵高，对自己的不足十分了解，但正如他在信中所言，只要坚持下去"
+            },
+            methods:{
+                translators:function(){
+                    return this.translator.join(' / ')
+                },
+                authors:function(){
+                    return this.author.join(' / ')
+                },
+                abstract :function(){
+                    var summary = this.summary
+                    if(summary.length>=140) {
+                        summary = summary.substr(0,140) + '...'
+                    }
+                    return "<p>" + summary.replace(/(.*)\n/g,function($0,$1){return $1 + "</p>"})
+                }
+            }
+        }
+
+        new Vue(card)
+    </script>
 </body>
 </html>
