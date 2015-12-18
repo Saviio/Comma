@@ -1,9 +1,6 @@
 
-
-function transform(template){
-
+exports.transform = function(template){
     var dom = document.createElement('div')
-
     var args = [].slice.call(arguments,1)
     args.forEach(function(e,i){
         var re = new RegExp("\\{\\{"+i+"\\}\\}",'g')
@@ -17,6 +14,3 @@ function transform(template){
     dom.innerHTML = template
     return dom.children.length == 1 ? dom.children[0] : dom.children
 }
-
-
-exports.transform = transform

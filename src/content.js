@@ -2,22 +2,15 @@
 var operation = require('./operation'),
     ITEM = {
         url  : null,
-        data : null
+        payload : null
     }
 
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
-    if (msg.text === 'PAGE_INIT') {
-        sendResponse(true)
-    }
-
     switch(msg.type){
-        case "SHOW_DETAIL":
-            operation.showDetail(ITEM)
+        case "SHOW_CARD":
+            operation.showCard(ITEM)
             break
-        case "PAGE_INIT":
-            //console.log('PAGE_INIT')
-            break
-        case "DETAIL_CLOSE":
+        case "REMOVE_CARD":
             break
         default:
             break

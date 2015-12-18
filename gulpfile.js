@@ -12,7 +12,7 @@ gulp.task('client', function() {
 });
 
 gulp.task('background',function(){
-    gulp.src(['src/rating.js'])
+    gulp.src(['src/background.js'])
         .pipe(browserify())
         .pipe(gulp.dest('./dist/js'))
 })

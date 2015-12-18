@@ -10,6 +10,6 @@ chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
 })
 
 
-chrome.browserAction.onClicked.addListener(function(tabId, changeInfo, tab){
-    chrome.tabs.sendMessage(tab.id, { type:'SHOW_DETAIL', noop })
+chrome.browserAction.onClicked.addListener(function(tab, changeInfo){
+    chrome.tabs.sendMessage(tab.id, { type:'SHOW_CARD' }, noop)
 })

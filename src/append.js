@@ -1,5 +1,4 @@
-
-var helper=require('./helper')
+var helper = require('./helper')
 
 
 
@@ -12,8 +11,8 @@ module.exports = function(data, type){
             +'<div class="dt">豆瓣评分：</div>'
             +'<div class="dd">'+ct+'</div>'
             +'</div>',
-        amazon:'<div>豆瓣评分:'+ct+'</div>',
-        dangdang:'<span>&nbsp;&nbsp;豆瓣评分:'+ct+'</span>'
+        amazon:'<div>豆瓣评分: '+ct+'</div>',
+        dangdang:'<span>&nbsp;&nbsp;豆瓣评分: '+ct+'</span>'
     }
 
     var dom = undefined

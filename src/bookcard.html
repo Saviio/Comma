@@ -46,12 +46,12 @@
         <p id="detail-tab">
             <span>简介</span>
             <span>笔记</span>
-        </>
+        </p>
         <div id="topic">
             <div id="title">{{title}}</div>
             <span class="rating">{{rating}}分</span>
         </div>
-        <div id="summary"><!--临界值145个字符，每add一个p 增加22个字符-->
+        <div id="summary">
              {{{abstract()}}}
         </div>
     </div>
@@ -68,7 +68,7 @@
                 pages:'416',
                 title:'梵高手稿',
                 rating:'8.0',
-                summary:"梵高一生中写过很多信，大多数都是寄给弟弟提奥的，也有不少是写给家人和其他艺术家的，如保罗•高更与埃米尔•伯纳德。梵高一生中也画了很多画，而基本上每一幅都被他在信中用如诗般优美的语言细细描述过。\n【内容简介】\n自学画画的梵高，对自己的不足十分了解，但正如他在信中所言，只要坚持下去"
+                summary:"梵高一生中写过很多信，大多数都是寄给弟弟提奥的，也有不少是写给家人和其他艺术家的，如保罗•高更与埃米尔•伯纳德。梵高一生中也画了很多画，而基本上每一幅都被他在信中用如诗般优美的语言细细描述过。\n【内容简介】\n自学画画的梵高，对自己的不足十分了解，但正如他在信中所言，只要坚持下去费解哎快乐到死解放路可打算减肥了侃大山交罚款了大数据量咖啡骄傲的顺口溜放假了侃大山"
             },
             methods:{
                 translators:function(){
@@ -82,7 +82,8 @@
                     if(summary.length>=140) {
                         summary = summary.substr(0,140) + '...'
                     }
-                    return "<p>" + summary.replace(/(.*)\n/g,function($0,$1){return $1 + "</p>"})
+
+                    return  summary.replace(/\n?(.*)\n?/g,function($0,$1){return "<p>" + $1 + "</p>"})
                 }
             }
         }

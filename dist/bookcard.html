@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Book - Extension</title>
+<meta name="keywords" content=""/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width"/>
+<link rel="stylesheet" href="./style.css" media="screen" charset="utf-8">
+<script src="./js/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="detail-head">
+            <div id="btn-close">
+                ×
+            </div>
+            <div id="detail-mask"></div>
+            <div id="detail-head-backgound" class="blur" v-bind:style="{ backgroundImage: 'url('+payload.images.large+')'}"></div>
+            <div id="detail-pic">
+                <img v-bind:src="payload.images.large" width="110px" height="160px"/>
+            </div>
+            <div id="detail-info">
+                <ul>
+                    <li>
+                        作者: {{authors()}}
+                    </li>
+                    <li>
+                        出版社: {{payload.publisher}}
+                    </li>
+                    <li>
+                        副标题: {{payload.subtitle}}
+                    </li>
+                    <li>
+                        出版年: {{payload.pubdate}}
+                    </li>
+                    <li>
+                        页数: {{payload.pages}}
+                    </li>
+                    <li>
+                        译者: {{translators()}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <p id="detail-tab">
+            <span>简介</span>
+            <span>笔记</span>
+        </p>
+        <div id="topic">
+            <div id="title">{{payload.title}}</div>
+            <span class="rating">{{payload.rating.average}}分</span>
+        </div>
+        <div id="summary">
+             {{{abstract()}}}
+        </div>
+    </div>
+</body>
+<script src="./js/card.js"></script>
+</html>

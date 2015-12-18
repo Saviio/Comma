@@ -47,28 +47,56 @@ function init(ref, acc){
     if(info == null && acc<3){
         setTimeout(init(ref, acc++), 1000)
     } else if(info.length >= 1) {
-        for(var i = 0; i < info.length; i++){
-            var ret = info[i].innerText.match(/ISBN[:|：]\W?(\d{10,})/)
-            if(ret && ret.length > 0){
-                var ISBN = ret[1]
-                connect('GET','https://api.douban.com/v2/book/isbn/' + ISBN)
-                    .then(function(data){
-                        ref['data'] = data
-                        append(data, type)
-                    },function(e){
-                        append(null, type)
-                    })
-                break
-            }
+        var i = null
+        while(i = info.pop()){
+            var ret = i.innerText.match(/ISBN[:|：]\W?(\d{10,})/)
+            if(!ret || ret.length < 1) continue
+
+            connect('GET','https://api.douban.com/v2/book/isbn/' + ret[1])
+                .then(function(data){
+                    ref.payload = data
+                    ref.url = 'https://api.douban.com/v2/book/isbn/' + ret[1]
+                    append(data, type)
+                },function(e){
+                    append(null, type)
+                })
+            break
         }
     }
 }
 
 
-function showDetail(ref){
-    if(ref.data === null || ref.data === undefined) return
-    
-    var iframe = '<iframe src="{{0}} style="{{1}}"></iframe>"'
+function showCard(ref){
+    if(ref.payload == null) return
+    var extensionOrigin = 'chrome-extension://' + chrome.runtime.id
+
+    if (!location.ancestorOrigins.contains(extensionOrigin) && document.querySelector('#__shudianerplugin__') === null) {
+        var iframe = document.createElement('iframe')
+        iframe.src = chrome.runtime.getURL('bookcard.html')
+        iframe.id = '__shudianerplugin__'
+
+        iframe.style.cssText =    'position:fixed;'
+                                + 'top:60px;'
+                                + 'right:-200px;'
+                                + 'display:block;'
+                                + 'width:300px;'
+                                + 'height:500px;'
+                                + 'z-index:1000;'
+                                + 'border:none;'
+                                + 'transition:right 350ms ease-out;'
+
+        document.body.appendChild(iframe)
+
+        iframe.onload = function() {
+            iframe.style.right = '40px'
+            iframe.contentWindow.postMessage(ref, '*')
+        }
+
+        var listener = function(e){
+            
+        }
+    }
+    //var iframe = '<iframe src="{{0}} style="{{1}}"></iframe>"'
 }
 
 
@@ -76,4 +104,4 @@ function showDetail(ref){
 
 
 exports.init = init
-exports.showDetail = showDetail
+exports.showCard = showCard
