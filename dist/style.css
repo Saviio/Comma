@@ -8,7 +8,7 @@ body{
 
 #app{
     width:290px;
-    height: 450px;
+    height: 448px;
     /*background-color: #2F373D;*/
     background-color: #F1F1EC;
     border-radius: 4px;
@@ -196,6 +196,7 @@ body{
     margin-bottom: 0px;
     margin-top: 0px;
     word-wrap: break-word;
+    text-indent: 1em;
 }
 
 .star{

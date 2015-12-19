@@ -43,7 +43,7 @@ function init(ref, acc){
     if(type === null) return
 
 
-    var info = DOM.querySelectorAll(type.selector)
+    var info = [].slice.call(DOM.querySelectorAll(type.selector))
     if(info == null && acc<3){
         setTimeout(init(ref, acc++), 1000)
     } else if(info.length >= 1) {
@@ -83,7 +83,7 @@ function showCard(ref){
                                 + 'height:500px;'
                                 + 'z-index:1000;'
                                 + 'border:none;'
-                                + 'transition:right 350ms ease-out;'
+                                + 'transition:right 240ms ease-out;'
 
         document.body.appendChild(iframe)
 
@@ -92,11 +92,18 @@ function showCard(ref){
             iframe.contentWindow.postMessage(ref, '*')
         }
 
-        var listener = function(e){
-            
+        var listener = function listener (e){
+            if(e.data.type === "CLOSE_CARD"){
+                window.removeEventListener('message', listener)
+                iframe.style.right='-300px'
+                setTimeout(function(){
+                    document.body.removeChild(iframe)
+                },500)
+            }
         }
+
+        window.addEventListener('message', listener)
     }
-    //var iframe = '<iframe src="{{0}} style="{{1}}"></iframe>"'
 }
 
 
