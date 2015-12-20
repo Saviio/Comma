@@ -2,7 +2,7 @@
     "author":"Saviio",
     "manifest_version": 2,
     "name": "Bookstore.Extension",
-    "version": "0.0",
+    "version": "1.0",
     "description": "Fetch the rate of book from douban and display it in the website.",
     "background": {
         "persistent": false,
@@ -32,7 +32,7 @@
         "default_title": "Bookstore.Extension"
     },
     "web_accessible_resources": [
-        "bookcard.html"
+        "main.html"
     ],
     "permissions": ["activeTab","http://*.douban.com/","https://*.douban.com/"]
 }

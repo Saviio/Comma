@@ -1,5 +1,5 @@
 var source = null
-var card = {
+var app = {
     el:'#app',
     data: {
         payload:{
@@ -27,23 +27,32 @@ var card = {
             if(summary && summary.length >= 124) {
                 summary = summary.substr(0, 124) + '...'
             }
-
             return  summary.replace(/\n?(.*)\n?/g,function($0,$1){return "<p>" + $1 + "</p>"})
         }
     },
     methods:{
         close:function(){
-            source.postMessage({type:'CLOSE_CARD',data:null}, '*')
+            if(source !== null){
+                source.postMessage({type:'CLOSE_CARD',data:null}, '*')
+            }
+        },
+        switchTab:function(tabId){
+            var tabs = document.querySelectorAll('.tab-container > div')
+            var tab = document.querySelector('#'+tabId)
+            Array.prototype.forEach.call(tabs, function(elem){
+                if(elem.id !== tabId) elem.style.left = '-100%'
+            })
+            tab.style.left = '0%'
         }
     }
 }
 
-new Vue(card)
+new Vue(app)
 
 
 window.addEventListener('message', function(e){
     if(e.data.payload == null) return
-    card.data.payload = e.data.payload
+    app.data.payload = e.data.payload
     if(!source) source = e.source
     console.log(e.data)
 })

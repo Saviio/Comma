@@ -4,7 +4,6 @@ var uglify = require('gulp-uglify');
 
 
 gulp.task('client', function() {
-
     gulp.src(['src/content.js'])
         .pipe(browserify())
         .pipe(uglify())

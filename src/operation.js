@@ -70,10 +70,10 @@ function showCard(ref){
     if(ref.payload == null) return
     var extensionOrigin = 'chrome-extension://' + chrome.runtime.id
 
-    if (!location.ancestorOrigins.contains(extensionOrigin) && document.querySelector('#__shudianerplugin__') === null) {
+    if (!location.ancestorOrigins.contains(extensionOrigin) && document.querySelector('#__commaplugin__') === null) {
         var iframe = document.createElement('iframe')
-        iframe.src = chrome.runtime.getURL('bookcard.html')
-        iframe.id = '__shudianerplugin__'
+        iframe.src = chrome.runtime.getURL('main.html')
+        iframe.id = '__commaplugin__'
 
         iframe.style.cssText =    'position:fixed;'
                                 + 'top:60px;'
@@ -95,7 +95,7 @@ function showCard(ref){
         var listener = function listener (e){
             if(e.data.type === "CLOSE_CARD"){
                 window.removeEventListener('message', listener)
-                iframe.style.right='-300px'
+                iframe.style.right = '-300px'
                 setTimeout(function(){
                     document.body.removeChild(iframe)
                 },500)

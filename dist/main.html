@@ -44,15 +44,22 @@
             </div>
         </div>
         <p id="detail-tab">
-            <span>简介</span>
-            <span>笔记</span>
+            <span v-on:click="switchTab('abstract')">简介</span>
+            <span v-on:click="switchTab('collection')">笔记</span>
         </p>
-        <div id="topic">
-            <div id="title">{{payload.title}}</div>
-            <span class="rating">{{payload.rating.average}}分</span>
-        </div>
-        <div id="summary">
-             {{{abstract}}}
+        <div class="tab-container">
+            <div class="tab" id="abstract" style="left:0%;">
+                <div id="topic">
+                    <div id="title">{{payload.title}}</div>
+                    <span class="rating">{{payload.rating.average}}分</span>
+                </div>
+                <div id="summary">
+                     {{{abstract}}}
+                </div>
+            </div>
+            <div class="tab" id="collection" style="left:-100%">
+
+            </div>
         </div>
     </div>
 </body>

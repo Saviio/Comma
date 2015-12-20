@@ -199,6 +199,16 @@ body{
     text-indent: 1em;
 }
 
+.tab-container{
+    position: relative;
+}
+
+.tab-container > div{
+    position: absolute;
+    transition: all 200ms ease;
+    width: 100%;
+}
+
 .star{
     display: inline-block;
     zoom:1;
