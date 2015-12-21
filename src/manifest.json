@@ -1,0 +1,38 @@
+{
+    "author":"Saviio",
+    "manifest_version": 2,
+    "name": "Comma",
+    "version": "1.0",
+    "description": "逗点书摘",
+    "background": {
+        "persistent": false,
+        "scripts": ["background.js"]
+    },
+    "content_scripts": [
+        {
+            "matches": ["*://*.jd.com/*"],
+            "js": ["content.js"],
+            "run_at":"document_end",
+            "css":["css/content.css"],
+            "all_frames": true
+        },
+        {
+            "matches": ["*://*.amazon.cn/*"],
+            "js": ["content.js"],
+            "run_at":"document_end"
+        },
+        {
+            "matches": ["*://*.dangdang.com/*"],
+            "js": ["content.js"],
+            "run_at":"document_end"
+        }
+    ],
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_title": "Comma"
+    },
+    "web_accessible_resources": [
+        "app/index.html"
+    ],
+    "permissions": ["activeTab","http://*.douban.com/","https://*.douban.com/"]
+}

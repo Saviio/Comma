@@ -1,21 +1,14 @@
+import * as handler from './handler.js'
+import { SHOW_ASIDE, REMOVE_ASIDE } from './Action.js'
 
-var operation = require('./operation'),
-    ITEM = {
-        url  : null,
-        payload : null
-    }
 
-chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
-    switch(msg.type){
-        case "SHOW_CARD":
-            operation.showCard(ITEM)
-            break
-        case "REMOVE_CARD":
-            break
-        default:
-            break
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+    if(msg.type === SHOW_ASIDE){
+        handler.showAside()
+    } else if(msg.type === REMOVE_ASIDE){
+        handler.removeAsideForce()
     }
 })
 
 
-operation.init(ITEM)
+handler.init()
