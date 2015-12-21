@@ -15,7 +15,8 @@ window.addEventListener('message', event => {
     new Vue({
         el: 'body',
         data:{
-            payload:payload,
+            payload,
+            url,
             dbid:id
         },
         methods:{

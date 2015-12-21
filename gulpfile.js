@@ -4,11 +4,23 @@ var browserify = require('browserify')
 var source = require('vinyl-source-stream')
 
 
-gulp.task('clean:init',function(){
+gulp.task('clean',function(){
     del('./dist')
 })
 
-gulp.task('client', ['clean:init'], function() {
+gulp.task('copy', ['clean'], function(){
+    gulp.src(['src/app/img/*','src/app/svg/*','src/app/index.html'], {base:'./src'})
+        .pipe(gulp.dest('./dist/'))
+
+    gulp.src(['src/**/*','!src/app/**','!src/**/*.js'])
+        .pipe(gulp.dest('./dist'))
+
+    gulp.src('icon.png')
+        .pipe(gulp.dest('./dist'))
+})
+
+gulp.task('client', function() {
+
     var entry = ['content.js','background.js']
 
     entry.forEach(function(e){
@@ -18,36 +30,15 @@ gulp.task('client', ['clean:init'], function() {
         .pipe(source(e))
         .pipe(gulp.dest('./dist'))
     })
-
-
-    gulp.src(['src/main.html'])
-        .pipe(gulp.dest('./dist/app'))
-    gulp.src(['src/manifest.json'])
-        .pipe(gulp.dest('./dist'))
-    gulp.src(['src/vendor/*'])
-        .pipe(gulp.dest('./dist/vendor'))
-    gulp.src(['src/svg/*'])
-        .pipe(gulp.dest('./dist/svg'))
-    gulp.src(['src/css/*'])
-        .pipe(gulp.dest('./dist/css'))
 })
 
 gulp.task('aside', function(){
-    gulp.src('src/app/index.html')
-        .pipe(gulp.dest('./dist/app'))
-
-    gulp.src('src/app/svg/*')
-        .pipe(gulp.dest('./dist/app/svg'))
-
-    gulp.src('src/app/img/*')
-        .pipe(gulp.dest('./dist/app/img'))
-
     return browserify('./src/app/main.js')
         .transform('babelify')
         .transform('vueify')
         .bundle()
         .on('error', function(err){
-            console.log(err.stack)
+            console.log(err)
             this.emit('end')
         })
         .pipe(source('built.js'))
@@ -56,6 +47,4 @@ gulp.task('aside', function(){
 
 
 
-
-
-gulp.task('default',['client','aside'])
+gulp.task('default',['copy', 'client', 'aside'])

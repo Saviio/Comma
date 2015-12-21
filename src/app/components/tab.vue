@@ -1,6 +1,7 @@
 <style lang="scss" scoped>
     .tab-panel{
         display: block;
+        height: 203px;
     }
 </style>
 

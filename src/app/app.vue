@@ -4,7 +4,7 @@
 div#app
     div#btn-close(v-on:click="close") ×
     view(:info="info", :image="image")
-    tabs(id="tab")
+    tabs(id="tab", :dbid="fetchReviews")
         tab(header="简介")
             div(v-if="payload != null")
                 div#topic
@@ -16,8 +16,8 @@ div#app
                     {{{transform(summary)}}}
             div.notfound(v-else)
                 img(src="./img/notfound.png")
-        tab(header="书评", id="reviews")
-            slider(:dbid="fetchReviews")
+        tab(header="书评", id="reviews", v-if!="reviews.length > 0")
+            slider
                 slider-item(v-for="review in reviews", track-by="$index")
                     div.review
                         div.avatar
@@ -43,11 +43,10 @@ import { rules, assert } from './rules.js'
 export default {
     data() {
         return {
-            msg: 'Hello Vueify',
             reviews: []
         }
     },
-    props:['payload', 'dbid', 'close'],
+    props:['payload', 'dbid', 'url', 'close'],
     components: {
         sliderItem,
         slider,
@@ -61,9 +60,9 @@ export default {
             let charcount = 2
             let index = 0
 
-            while(charcount / 19 <= 8 && index <summary.length){
+            while(charcount / 19 <= 8 && index < summary.length){
                 if(/[a-z0-9]/i.test(summary[index])) charcount+=0.5
-                else if(summary[index] === '\n') charcount+=14
+                else if(summary[index] === '\n') charcount+= 21
                 else charcount+=1
                 index++
             }
@@ -102,16 +101,14 @@ export default {
                         ? res.json().then(json => json.reviews)
                         : [])
                 .then(reviews => this.reviews = reviews)
+
             return this.dbid
-        },
-        showReviews(){
-            return this.reviews.length > 0
         }
     },
     methods:{
         transform(src){
             return src.replace(/[\r\n|\n]?(.*)[\r\n|\n]?/g, ($0,$1) =>
-                        $1 !=="" ? "<p class='paragraph'>" + $1 + "</p>" : "")
+                        $1 !== "" ? "<p class='paragraph'>" + $1 + "</p>" : "")
         },
         openTab(url){
             window.open(url)

@@ -6,6 +6,7 @@ const DOM  = document
 const WIN  = window
 const BODY = DOM.body
 const ISBNAPI = 'https://api.douban.com/v2/book/isbn/'
+const DOUBANPAGE = 'http://book.douban.com/subject/'
 const ASIDE_ID = '__commaPlugin__'
 
 let ref = { url: null, payload: null, id: null }
@@ -60,7 +61,7 @@ export function init(acc){
                     res.ok && res.json()
                         .then(data => {
                             ref.payload = data
-                            ref.url = ISBNAPI + ret[1]
+                            ref.url = DOUBANPAGE + data.id
                             ref.id = data.id
                             append(data, type)
                         })
@@ -87,7 +88,7 @@ export function removeAsideForce(){
 export function asideLoad(){
     let iframe = DOM.querySelector(`#${ASIDE_ID}`)
     iframe.style.right = '40px'
-    iframe.contentWindow.postMessage({ type:PASSING_DATA, passing:ref }, '*')
+    iframe.contentWindow.postMessage({ type: PASSING_DATA, passing: ref }, '*')
 }
 
 export function showAside(){
@@ -103,10 +104,8 @@ export function showAside(){
             display:block;width:300px;height:500px;border:none;
             transition:right 240ms ease-out;
         `
-
-        BODY.appendChild(iframe)
-        //iframe.onload = asideLoad
         iframe.addEventListener('load', asideLoad)
+        BODY.appendChild(iframe)
         WIN.addEventListener('message', removeAside)
     }
 }

@@ -3,7 +3,7 @@ import { SHOW_ASIDE, PAGE_INIT, REMOVE_ASIDE } from './Action.js'
 let noop = () => {}
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    if (changeInfo.status == 'complete' && tab.active) {
+    if (changeInfo.status === 'complete' && tab.active) {
         chrome.tabs.sendMessage(tab.id, { type: PAGE_INIT }, noop)
     }
 })
