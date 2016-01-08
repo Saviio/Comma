@@ -1,20 +1,50 @@
-var gulp = require('gulp');
-var browserify = require('gulp-browserify');
-var uglify = require('gulp-uglify');
+var gulp = require('gulp')
+var del = require('del')
+var browserify = require('browserify')
+var source = require('vinyl-source-stream')
 
+
+gulp.task('clean',function(){
+    del('./dist')
+})
+
+gulp.task('copy', ['clean'], function(){
+    gulp.src(['src/app/img/*','src/app/svg/*','src/app/index.html'], {base:'./src'})
+        .pipe(gulp.dest('./dist/'))
+
+    gulp.src(['src/**/*','!src/app/**','!src/**/*.js'])
+        .pipe(gulp.dest('./dist'))
+
+    gulp.src('logo.png')
+        .pipe(gulp.dest('./dist'))
+})
 
 gulp.task('client', function() {
-    gulp.src(['src/content.js'])
-        .pipe(browserify())
-        .pipe(uglify())
-        .pipe(gulp.dest('./dist/js'))
-});
 
-gulp.task('background',function(){
-    gulp.src(['src/background.js'])
-        .pipe(browserify())
-        .pipe(gulp.dest('./dist/js'))
+    var entry = ['content.js','background.js']
+
+    entry.forEach(function(e){
+        browserify('src/' + e)
+        .transform('babelify')
+        .bundle()
+        .pipe(source(e))
+        .pipe(gulp.dest('./dist'))
+    })
+})
+
+gulp.task('aside', function(){
+    return browserify('./src/app/main.js')
+        .transform('babelify')
+        .transform('vueify')
+        .bundle()
+        .on('error', function(err){
+            console.log(err)
+            this.emit('end')
+        })
+        .pipe(source('built.js'))
+        .pipe(gulp.dest('./dist/app'))
 })
 
 
-gulp.task('default',['client','background'])
+
+gulp.task('default',['copy', 'client', 'aside'])
