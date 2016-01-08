@@ -97,10 +97,8 @@ export default {
         fetchReviews(){
             let reviewAPI = `https://api.douban.com/v2/book/${this.dbid}/reviews`
             fetch(reviewAPI)
-                .then(res => res.ok
-                        ? res.json().then(json => json.reviews)
-                        : [])
-                .then(reviews => this.reviews = reviews)
+                .then(res => res.ok ? res.json() : {reviews: []})
+                .then(data => this.reviews = data.reviews)
 
             return this.dbid
         }
