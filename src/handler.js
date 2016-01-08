@@ -32,6 +32,33 @@ let website = {
     }
 }
 
+function fetchData(type){
+    var info = [].slice.call(DOM.querySelectorAll(type.selector))
+    if(info.length >= 1) {
+        var title = DOM.querySelector('title').textContent
+        if(title.indexOf('书评') === -1 && title.indexOf('图书') === -1) return
+
+        var i = null
+        while(i = info.pop()){
+            var ret = i.innerText.match(/ISBN[:|：]\W?(\d{10,})/)
+            if(!ret || ret.length < 1) continue
+
+            fetch(ISBNAPI + ret[1])
+                .then(res => res.ok ? res.json() : null)
+                .then(data => {
+                    if(data !== null){
+                        ref.payload = data
+                        ref.url = DOUBANPAGE + data.id
+                        ref.id = data.id
+                    }
+
+                    append(data, type)
+                })
+                
+            break
+        }
+    }
+}
 
 export function init(acc){
 
@@ -46,29 +73,14 @@ export function init(acc){
 
     if(type === null) return
 
+    var state = DOM.readyState
 
-    var info = [].slice.call(DOM.querySelectorAll(type.selector))
-    if(info == null && acc<3){
-        setTimeout(init(acc++), 1000)
-    } else if(info.length >= 1) {
-        var i = null
-        while(i = info.pop()){
-            var ret = i.innerText.match(/ISBN[:|：]\W?(\d{10,})/)
-            if(!ret || ret.length < 1) continue
+    void function(t){
+        /interactive|complete/i.test(DOM.readyState)
+        ? fetchData(type)
+        : DOM.addEventListener('DOMContentLoaded', (e) => fetchData(type, e))
+    }()
 
-            fetch(ISBNAPI + ret[1])
-                .then(res => {
-                    res.ok && res.json()
-                        .then(data => {
-                            ref.payload = data
-                            ref.url = DOUBANPAGE + data.id
-                            ref.id = data.id
-                            append(data, type)
-                        })
-                },e => append(null, type))
-            break
-        }
-    }
 }
 
 export function removeAside(e){

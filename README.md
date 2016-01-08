@@ -11,22 +11,22 @@
 ####当当
 ![image](https://raw.githubusercontent.com/Saviio/Saviio.github.io/master/images/dangdang.jpg)
 
+###侧边栏：
+
+点击地址栏左侧的应用图标，会自动滑出该书的一些摘要信息 e.g. 书概，豆瓣书评，如图所示
+![image](https://raw.githubusercontent.com/Saviio/Saviio.github.io/master/images/aside.png)
 
 ###使用
-1. 下载Bookstore.Extension.zip
-2. 打开Chrome
-3. 在地址栏中输入chrome://extensions/
-4. [下载](https://github.com/Saviio/Bookstore.Extension/raw/master/Bookstore.extension.crx), 并拖动至浏览器内
-5. 安装完成
+1. 打开Chrome
+2. 在地址栏中输入chrome://extensions/
+3. [下载](https://github.com/Saviio/Bookstore.Extension/raw/master/Bookstore.extension.crx), 并拖动至浏览器内
+4. 安装完成
 
 权限请求：
 
 ![image](https://raw.githubusercontent.com/Saviio/Saviio.github.io/master/images/bs.auth.jpg)
 
-###Todo
-1. 支持天猫书城?
-2. 优化插件响应逻辑
-3. 新增书籍详情功能
+
 
 
 ###License
