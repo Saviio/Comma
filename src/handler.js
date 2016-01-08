@@ -78,6 +78,7 @@ export function removeAside(e){
         WIN.removeEventListener('load', asideLoad)
         iframe.style.right = '-300px'
         setTimeout(() => BODY.removeChild(iframe), 500)
+        chrome.extension.sendMessage(REMOVE_ASIDE)
     }
 }
 

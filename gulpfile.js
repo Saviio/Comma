@@ -15,7 +15,7 @@ gulp.task('copy', ['clean'], function(){
     gulp.src(['src/**/*','!src/app/**','!src/**/*.js'])
         .pipe(gulp.dest('./dist'))
 
-    gulp.src('icon.png')
+    gulp.src('logo.png')
         .pipe(gulp.dest('./dist'))
 })
 

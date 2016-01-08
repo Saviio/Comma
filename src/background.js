@@ -18,3 +18,10 @@ chrome.browserAction.onClicked.addListener((tab, changeInfo) => {
 
     asideExpanded = !asideExpanded
 })
+
+
+chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
+    if(message === REMOVE_ASIDE){
+        asideExpanded = false
+    }
+})
