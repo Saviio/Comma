@@ -1,6 +1,6 @@
 
 import { append } from './utils.js'
-import { REMOVE_ASIDE, PASSING_DATA } from './Action.js'
+import { REMOVE_ASIDE, PASSING_DATA , PAGE_INIT } from './Action.js'
 
 const DOM  = document
 const WIN  = window
@@ -54,7 +54,7 @@ function fetchData(type){
 
                     append(data, type)
                 })
-                
+            chrome.extension.sendMessage(PAGE_INIT)
             break
         }
     }

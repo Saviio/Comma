@@ -23,5 +23,7 @@ chrome.browserAction.onClicked.addListener((tab, changeInfo) => {
 chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
     if(message === REMOVE_ASIDE){
         asideExpanded = false
+    } else if(message === PAGE_INIT){
+        asideExpanded = false
     }
 })
