@@ -61,7 +61,6 @@ function fetchData(type){
 }
 
 export function init(acc){
-
     acc = acc || 0
     var type = null
     for(var i in website){
@@ -73,12 +72,10 @@ export function init(acc){
 
     if(type === null) return
 
-    var state = DOM.readyState
-
     void function(t){
         /interactive|complete/i.test(DOM.readyState)
         ? fetchData(type)
-        : DOM.addEventListener('DOMContentLoaded', (e) => fetchData(type, e))
+        : DOM.addEventListener('DOMContentLoaded', e => fetchData(type, e))
     }()
 
 }
